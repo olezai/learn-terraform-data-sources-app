@@ -1,0 +1,35 @@
+Running plan in HCP Terraform. Output will stream here. Pressing Ctrl-C
+will stop streaming the logs, but will not stop the plan running remotely.
+
+Preparing the remote plan...
+
+To view this run in a browser, visit:
+https://app.terraform.io/app/olezaiven/learn-terraform-data-sources-app/runs/run-ZFjZiJTXV4rzcUib
+
+Waiting for the plan to start...
+
+Terraform v1.11.4
+on linux_amd64
+Initializing plugins and modules...
+data.terraform_remote_state.vpc: Refreshing...
+data.terraform_remote_state.vpc: Refresh complete after 0s
+╷
+│ Error: configuring Terraform AWS Provider: no valid credential sources for Terraform AWS Provider found.
+│
+│ Please see https://registry.terraform.io/providers/hashicorp/aws
+│ for more information about providing credentials.
+│
+│ Error: failed to refresh cached credentials, no EC2 IMDS role found, operation error ec2imds: GetMetadata, request send failed, Get "http://169.254.169.254/latest/meta-data/iam/security-credentials/": dial tcp 169.254.169.254:80: i/o timeout
+│
+│
+│   with provider["registry.terraform.io/hashicorp/aws"],
+│   on main.tf line 4, in provider "aws":
+│    4: provider "aws" {
+│
+╵
+Operation failed: failed running terraform plan (exit 1)
+
+─────────────────────────────────────────────────────────────────────────────
+
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
