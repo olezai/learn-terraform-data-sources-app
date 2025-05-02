@@ -17,6 +17,16 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+  }
+}
+
 resource "random_string" "lb_id" {
   length  = 3
   special = false
@@ -54,10 +64,10 @@ module "elb_http" {
 }
 
 resource "aws_instance" "app" {
-  
+
   count = var.instances_per_subnet * length(data.terraform_remote_state.vpc.outputs.private_subnet_ids)
 
-  ami = "ami-04d29b6f966df1537"
+  ami = data.aws_ami.amazon_linux.id
 
   instance_type = var.instance_type
 
